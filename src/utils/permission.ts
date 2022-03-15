@@ -6,9 +6,10 @@ import {
   request,
   RESULTS,
 } from 'react-native-permissions';
+import {STRINGS} from '../constants';
 import {showCustomAlert} from './alert';
 
-export const handlePhotoLibraryPermission = async (func:any) => {
+export const handlePhotoLibraryPermission = async (func: any) => {
   if (Platform.OS === 'android') {
     func && func();
   } else {
@@ -26,15 +27,19 @@ export const handlePhotoLibraryPermission = async (func:any) => {
       }
     } else {
       handleOpenSetting(
-        '"Ternoa" Would Like to Access Your Camera Roll',
-        'This allows BeFamily to share photos from your library and save photos to your camera roll.',
+        STRINGS.cameraPermissionTitle,
+        STRINGS.cameraPermissionDescription,
       );
     }
   }
 };
 
-const handleOpenSetting = (title:string, message:string) => {
-  showCustomAlert(title, message, 'Cancel', 'Enable Library Access', () =>
-    openSettings(),
+const handleOpenSetting = (title: string, message: string) => {
+  showCustomAlert(
+    title,
+    message,
+    STRINGS.cancel,
+    STRINGS.enableLibraryAccess,
+    () => openSettings(),
   );
 };

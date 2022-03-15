@@ -1,17 +1,10 @@
 import {useState} from 'react';
-import {Platform} from 'react-native';
+import {STRINGS} from '../constants';
+import {uploadFileService} from '../data/services';
+import {IFile} from '../models';
+import {showAlert} from '../utils/alert';
 import {pickFile} from '../utils/file-picker';
 import {handlePhotoLibraryPermission} from '../utils/permission';
-import {ENV} from '../ternoa-export';
-import axios from 'axios';
-import {showAlert} from '../utils/alert';
-
-export interface IFile {
-  path: string;
-  size: number;
-  name: string;
-  type: string;
-}
 
 export interface IUseUploadFile {
   file: IFile | undefined;
@@ -33,43 +26,25 @@ export const useUploadFile = (): IUseUploadFile => {
   };
 
   const uploadFile = async () => {
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', {
-        name: file.name,
-        type: file.type,
-        uri:
-          Platform.OS === 'android'
-            ? file.path
-            : file.path.replace('file://', ''),
-      });
+    if (!file) {
+      return;
+    }
+    try {
       setProgress(0);
       setUploading(true);
-      try {
-        await axios.post(`${ENV.API_URL}/add`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Accept: 'application/json',
-          },
-          onUploadProgress: status => {
-            setProgress(status.loaded / status.total);
-          },
-        });
-        setTimeout(() => {
-          setUploading(false);
-          showAlert(
-            'OK',
-            'File Uploading Success',
-            'Your file has been uploaded successfully',
-          );
-        }, 200);
-      } catch (error) {
+      await uploadFileService(file, status => {
+        setProgress(status);
+      });
+      setTimeout(() => {
+        setUploading(false);
         showAlert(
-          'OK',
-          'File Uploading Failed',
-          'Something went wrong. Please try again later.',
+          STRINGS.ok,
+          STRINGS.fileUploadingSuccess,
+          STRINGS.uploadingSuccessMsg,
         );
-      }
+      }, 200);
+    } catch (error) {
+      showAlert(STRINGS.ok, STRINGS.fileUploadingFailed, STRINGS.error);
     }
   };
 
