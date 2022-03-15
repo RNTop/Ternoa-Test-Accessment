@@ -25,7 +25,7 @@ export const CustomButton = ({
   onPress,
   style,
   width = buttonWidth,
-  disabled,
+  disabled = false,
 }: ICustomButton) => {
   const [pressed, setPressed] = useState(false);
   return (
@@ -46,7 +46,11 @@ export const CustomButton = ({
       onPress={() => {
         onPress();
       }}>
-      <View style={styles.button}>
+      <View
+        style={[
+          styles.button,
+          {backgroundColor: disabled ? COLORS.grey : COLORS.secondary},
+        ]}>
         <Text style={styles.name}>{name}</Text>
       </View>
     </TouchableOpacity>
@@ -64,7 +68,6 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.secondary,
     borderRadius: buttonHeight / 2,
   },
   name: {

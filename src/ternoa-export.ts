@@ -3,5 +3,5 @@ interface IEnv {
 }
 
 export const ENV: IEnv = {
-  API_URL: '',
+  API_URL: 'https://ipfs-dev.ternoa.dev/api/v0',
 };

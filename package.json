@@ -10,10 +10,13 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
-    "axios": "^0.26.1",
+    "axios": "0.19.0",
     "react": "17.0.2",
     "react-native": "0.67.3",
-    "react-native-document-picker": "^8.0.0"
+    "react-native-document-picker": "^8.0.0",
+    "react-native-permissions": "^3.3.1",
+    "react-native-progress": "^5.0.0",
+    "react-native-svg": "^12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
