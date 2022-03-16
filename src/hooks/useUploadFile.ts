@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {STRINGS} from '../constants';
-import {uploadFileService} from '../data/services';
+import { uploadFileService } from '@data/services';
 import {IFile} from '../models';
 import {showAlert} from '../utils/alert';
 import {pickFile} from '../utils/file-picker';

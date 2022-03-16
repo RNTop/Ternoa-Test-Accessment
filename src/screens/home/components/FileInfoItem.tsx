@@ -8,7 +8,7 @@ interface IFileInfoItem {
 
 export const FileInfoItem = ({label, value}: IFileInfoItem) => {
   return (
-    <View style={styles.container}>
+    <View testID={label} style={styles.container}>
       <Text style={styles.label}>{label}: </Text>
       <Text>{value}</Text>
     </View>

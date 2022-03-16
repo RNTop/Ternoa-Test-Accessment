@@ -13,6 +13,7 @@ const buttonHeight = 56;
 const shrinkDistance = 4;
 
 interface ICustomButton {
+  testID:string;
   onPress: () => void;
   name?: string;
   style?: ViewStyle;
@@ -30,6 +31,7 @@ export const CustomButton = ({
   const [pressed, setPressed] = useState(false);
   return (
     <TouchableOpacity
+      testID={'custom-button'}
       style={[
         styles.container,
         style,

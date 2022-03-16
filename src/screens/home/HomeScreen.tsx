@@ -4,14 +4,14 @@ import {CustomButton} from '../../components';
 import {STRINGS} from '../../constants';
 import {IUseUploadFile} from '../../hooks';
 import {FileInfoItem} from './components';
-import * as Progress from 'react-native-progress';
+import {Circle} from 'react-native-progress';
 export interface IHomeScreen {
   fileInfo: IUseUploadFile;
 }
 
 const HomeScreen = ({fileInfo}: IHomeScreen) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView testID='home-screen'>
       <View style={styles.fileInformation}>
         {fileInfo && fileInfo.file && (
           <View>
@@ -22,6 +22,7 @@ const HomeScreen = ({fileInfo}: IHomeScreen) => {
         )}
       </View>
       <CustomButton
+        testID='select-file'
         name={STRINGS.selectFile}
         onPress={() => {
           fileInfo.pickFileFromLibrary();
@@ -29,7 +30,7 @@ const HomeScreen = ({fileInfo}: IHomeScreen) => {
       />
       <View style={styles.progress}>
         {fileInfo.uploading && (
-          <Progress.Circle
+          <Circle
             progress={fileInfo.progress}
             size={100}
             showsText
@@ -38,6 +39,7 @@ const HomeScreen = ({fileInfo}: IHomeScreen) => {
         )}
       </View>
       <CustomButton
+        testID='upload-selected-file'
         name={STRINGS.uploadSelectedFile}
         disabled={!fileInfo.file}
         onPress={() => {
