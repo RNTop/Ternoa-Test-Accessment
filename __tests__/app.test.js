@@ -15,6 +15,13 @@ jest.mock('react-native-permissions', () => {
     };
 });
 
+jest.mock('react-native-image-picker', () => {
+  return {
+    launchImageLibrary: () => {},
+  };
+});
+
+
 describe('--- App Component ---', () => {
   it('to render empty', async () => {
     const tree = renderer.create(<App />);

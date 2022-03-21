@@ -14,6 +14,12 @@ jest.mock('react-native-permissions', () => {
     };
 });
 
+jest.mock('react-native-image-picker', () => {
+  return {
+    launchImageLibrary: () => {},
+  };
+});
+
 describe('--- Home Screen Component ---', () => {
   it('to render empty', async () => {
     const tree = renderer.create(<Home />);
